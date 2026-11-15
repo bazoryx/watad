@@ -26,7 +26,7 @@ class S {
       };
 
   String get nextPrayer => t('الصلاة القادمة', 'Next prayer');
-  String iqamaAt(String t) => t('الإقامة $t', 'Iqama $t');
+  String iqamaAt(String time) => t('الإقامة $time', 'Iqama $time');
   String get mosqueStreak => t('ستريك المسجد', 'Mosque streak');
   String get maintenanceStreak => t('ستريك المحافظة', 'On-time streak');
   String get consecutivePrayers => t('صلاة متتالية', 'prayers in a row');
@@ -74,7 +74,7 @@ class S {
   String get streakSafe => t('ستريكك محفوظ ولن ينكسر', 'Your streak is safe');
   String get endExcuse => t('انتهى العذر', 'End excuse');
 
-  String excuseType(ExcuseType t) => switch (t) {
+  String excuseType(ExcuseType type) => switch (type) {
         ExcuseType.travel => t('سفر', 'Travel'),
         ExcuseType.illness => t('مرض', 'Illness'),
         ExcuseType.menstruation => t('عذر المرأة', "Women's excuse"),
