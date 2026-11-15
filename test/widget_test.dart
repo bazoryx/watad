@@ -42,6 +42,7 @@ void main() {
     expect(find.text('سبت'), findsOneWidget);
     await tester.tap(find.text('الإعدادات').last);
     await tester.pump();
-    expect(find.text('الأعذار'), findsOneWidget);
+    expect(find.text('الأعذار', skipOffstage: false), findsOneWidget);
+    expect(find.text('التنبيهات والأذان'), findsOneWidget);
   });
 }
