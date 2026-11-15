@@ -174,11 +174,13 @@ class _NextPrayerCardState extends State<NextPrayerCard> {
                       fontWeight: FontWeight.w700,
                       color: Colors.white)),
               const SizedBox(width: 12),
-              Text(formatTime(next.time, s),
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: WColors.goldLight)),
+              Flexible(
+                child: Text(formatTime(next.time, s),
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: WColors.goldLight)),
+              ),
             ],
           ),
           const SizedBox(height: 6),
