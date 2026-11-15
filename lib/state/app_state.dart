@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import '../core/models.dart';
 import '../core/prayer_times.dart';
+import '../core/reminders.dart';
 import '../core/streak_engine.dart';
 import '../data/repository.dart';
 
@@ -11,12 +12,14 @@ class AppState extends ChangeNotifier {
   final Map<String, PrayerLog> _logs;
   final List<Excuse> _excuses;
   final DateTime startDay;
+  final ReminderScheduler _scheduler;
 
   StreakSummary? _summary;
   DateTime? _summaryDay;
 
-  AppState(this._repo)
-      : _logs = _repo.loadLogs(),
+  AppState(this._repo, {ReminderScheduler? scheduler})
+      : _scheduler = scheduler ?? NoopScheduler(),
+        _logs = _repo.loadLogs(),
         _excuses = _repo.loadExcuses(),
         startDay = _repo.startDay();
 
@@ -24,6 +27,7 @@ class AppState extends ChangeNotifier {
   City get city => cityById(_repo.cityId);
   set city(City c) {
     _repo.cityId = c.id;
+    _reschedule();
     notifyListeners();
   }
 
@@ -43,6 +47,22 @@ class AppState extends ChangeNotifier {
   set hideMosque(bool v) {
     _repo.hideMosque = v;
     notifyListeners();
+  }
+
+  // ---- reminders ----
+  ReminderSettings get reminders => _repo.reminders;
+  set reminders(ReminderSettings v) {
+    _repo.reminders = v;
+    _reschedule();
+    notifyListeners();
+  }
+
+  /// The next reminders, for the preview in settings.
+  List<ReminderEvent> upcomingReminders({int limit = 6}) =>
+      planReminders(city, reminders, DateTime.now()).take(limit).toList();
+
+  void _reschedule() {
+    _scheduler.schedule(planReminders(city, reminders, DateTime.now(), days: 7));
   }
 
   // ---- streaks ----
