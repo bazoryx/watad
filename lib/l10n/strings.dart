@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import '../core/models.dart';
+import '../core/reminders.dart';
 
 /// Arabic and English UI text. A plain map instead of gen-l10n, so the
 /// project builds the same on every Flutter version with no code generation.
@@ -110,6 +111,28 @@ class S {
   String get startExcuse => t('بدء عذر من اليوم', 'Start an excuse today');
   String get excusePrivacy => t('المجموعة ترى كلمة «عذر» فقط، بدون نوعه',
       'Your group only sees "excused", never the type');
+  // Reminders
+  String get remindersTitle => t('التنبيهات والأذان', 'Reminders & adhan');
+  String get remindersOn => t('تفعيل التنبيهات', 'Turn on reminders');
+  String get remindPrayers => t('الصلوات', 'Prayers');
+  String get remindBefore => t('تنبيه قبل الأذان', 'Reminder before adhan');
+  String get off => t('بدون', 'Off');
+  String minutesBefore(int m) => t('قبل $m دقيقة', '$m min before');
+  String get iqamaReminder => t('تنبيه الإقامة', 'Iqama reminder');
+  String get adhanVoice => t('صوت الأذان', 'Adhan voice');
+  String get voiceMakkah => t('مكة', 'Makkah');
+  String get voiceMadinah => t('المدينة', 'Madinah');
+  String get upcoming => t('التنبيهات القادمة', 'Upcoming reminders');
+  String get todayLabel => t('اليوم', 'Today');
+  String get tomorrowLabel => t('غدًا', 'Tomorrow');
+  String reminderKind(ReminderKind k) => switch (k) {
+        ReminderKind.before => t('قبل الأذان', 'Before adhan'),
+        ReminderKind.adhan => t('الأذان', 'Adhan'),
+        ReminderKind.iqama => t('الإقامة', 'Iqama'),
+      };
+  String get remindersNote => t(
+      'التنبيه في الخلفية وصوت الأذان يشتغلان في نسخة الآيفون. معاينة الويب تعرض الجدول فقط.',
+      'Background alerts and adhan audio work in the iPhone build. The web preview only shows the schedule.');
   String get noExcuse => t('لا يوجد عذر نشط', 'No active excuse');
 }
 
