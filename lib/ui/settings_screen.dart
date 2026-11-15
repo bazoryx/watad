@@ -4,6 +4,7 @@ import '../core/prayer_times.dart';
 import '../l10n/strings.dart';
 import '../state/app_state.dart';
 import '../theme/app_theme.dart';
+import 'reminders_section.dart';
 import 'widgets/common.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -120,20 +121,22 @@ class SettingsScreen extends StatelessWidget {
       ),
     ]);
 
+    final reminders = section(s.remindersTitle, reminderTiles(context, app, s));
+
     final wide = isWide(context);
     return SafeArea(
       child: wide
           ? Padding(
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
               child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                Expanded(child: ListView(children: [general, streak])),
+                Expanded(child: ListView(children: [general, reminders, streak])),
                 const SizedBox(width: 28),
                 Expanded(child: ListView(children: [excuses])),
               ]),
             )
           : ListView(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-              children: [general, streak, excuses],
+              children: [general, reminders, streak, excuses],
             ),
     );
   }
