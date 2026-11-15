@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../core/models.dart';
+import '../core/reminders.dart';
 
 /// Local storage for the first build (no accounts yet). Logs and excuses
 /// are kept as JSON. Moving to a cloud backend later only replaces this
@@ -13,6 +14,7 @@ class Repository {
   static const _kLocale = 'locale';
   static const _kAutoFreeze = 'auto_freeze';
   static const _kHideMosque = 'hide_mosque';
+  static const _kReminders = 'reminders_v1';
 
   final SharedPreferences _p;
   Repository(this._p);
@@ -63,4 +65,13 @@ class Repository {
 
   bool get hideMosque => _p.getBool(_kHideMosque) ?? false;
   set hideMosque(bool v) => _p.setBool(_kHideMosque, v);
+
+  ReminderSettings get reminders {
+    final raw = _p.getString(_kReminders);
+    if (raw == null) return ReminderSettings.defaults();
+    return ReminderSettings.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+  }
+
+  set reminders(ReminderSettings v) =>
+      _p.setString(_kReminders, jsonEncode(v.toJson()));
 }
