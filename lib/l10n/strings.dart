@@ -111,6 +111,27 @@ class S {
   String get startExcuse => t('بدء عذر من اليوم', 'Start an excuse today');
   String get excusePrivacy => t('المجموعة ترى كلمة «عذر» فقط، بدون نوعه',
       'Your group only sees "excused", never the type');
+  // Nearest mosque
+  String get toolsTitle => t('أدوات', 'Tools');
+  String get nearestMosque => t('أقرب مسجد', 'Nearest mosque');
+  String get nearestMosqueSub => t('المساجد القريبة منك مع الاتجاهات', 'Mosques near you with directions');
+  String get locating => t('نحدد موقعك…', 'Finding your location…');
+  String get searchingMosques => t('نبحث عن المساجد القريبة…', 'Looking for nearby mosques…');
+  String get noMosques => t('ما لقينا مساجد قريبة', 'No mosques found nearby');
+  String get locDenied => t('نحتاج إذن الموقع. فعّله من إعدادات المتصفح ثم أعد المحاولة.',
+      'Location permission is needed. Enable it in the browser settings and try again.');
+  String get locUnavailable => t('تعذر تحديد موقعك. تأكد من تشغيل الموقع وأعد المحاولة.',
+      'Could not get your location. Make sure location is on and try again.');
+  String get searchFailed => t('تعذر البحث الآن، حاول بعد قليل.', 'Search failed, please try again shortly.');
+  String get retry => t('إعادة المحاولة', 'Try again');
+  String get unnamedMosque => t('مسجد', 'Mosque');
+  String get directions => t('الاتجاهات', 'Directions');
+  String get mosquesNote => t('موقعك يُستخدم للبحث فقط ولا يُحفظ. بيانات الخريطة من OpenStreetMap وقد لا تشمل كل المساجد.',
+      'Your location is only used for the search and never stored. Map data is from OpenStreetMap and may miss some mosques.');
+  String distance(double meters) => meters < 1000
+      ? t('${meters.round()} م', '${meters.round()} m')
+      : t('${(meters / 1000).toStringAsFixed(1)} كم', '${(meters / 1000).toStringAsFixed(1)} km');
+
   // Reminders
   String get remindersTitle => t('التنبيهات والأذان', 'Reminders & adhan');
   String get remindersOn => t('تفعيل التنبيهات', 'Turn on reminders');
