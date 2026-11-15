@@ -5,6 +5,7 @@ import '../l10n/strings.dart';
 import '../state/app_state.dart';
 import '../theme/app_theme.dart';
 import 'log_sheet.dart';
+import 'mosques_screen.dart';
 import 'widgets/common.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -58,6 +59,7 @@ class HomeScreen extends StatelessWidget {
           );
 
     final banner = _StatusBanner();
+    final tools = const _ToolsCard();
     final today = const _TodayCard();
 
     if (!isWide(context)) {
@@ -71,6 +73,8 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 12),
             streaks,
             banner,
+            const SizedBox(height: 12),
+            tools,
             const SizedBox(height: 12),
             today,
           ],
@@ -93,12 +97,33 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 12),
                 streaks,
                 banner,
+                const SizedBox(height: 12),
+                tools,
               ]),
             ),
             const SizedBox(width: 28),
             Expanded(child: ListView(children: [today])),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ToolsCard extends StatelessWidget {
+  const _ToolsCard();
+
+  @override
+  Widget build(BuildContext context) {
+    final s = S.of(context);
+    return Card(
+      child: ListTile(
+        leading: const Icon(Icons.mosque_outlined, color: WColors.mosqueGreen),
+        title: Text(s.nearestMosque),
+        subtitle: Text(s.nearestMosqueSub, style: const TextStyle(fontSize: 12)),
+        trailing: const Icon(Icons.chevron_right),
+        onTap: () => Navigator.of(context)
+            .push(MaterialPageRoute<void>(builder: (_) => const MosquesScreen())),
       ),
     );
   }
